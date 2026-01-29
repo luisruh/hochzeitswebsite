@@ -1,0 +1,206 @@
+/* Envelope stage */
+.envelope-stage{
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.envelope-wrap{
+  width: min(560px, 100%);
+  display: grid;
+  place-items: center;
+}
+
+.envelope-btn{
+  all: unset;
+  cursor: pointer;
+  width: min(560px, 100%);
+  display: grid;
+  place-items: center;
+  gap: 16px;
+  user-select: none;
+}
+
+.env-hint{
+  text-align: center;
+  opacity: .9;
+}
+.hint-title{
+  font-weight: 700;
+  letter-spacing: .4px;
+}
+.hint-sub{
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.envelope{
+  position: relative;
+  width: min(520px, 100%);
+  aspect-ratio: 16/10;
+  transform-style: preserve-3d;
+  border-radius: 18px;
+  isolation: isolate;
+}
+
+.env-shadow{
+  position: absolute;
+  width: min(520px, 100%);
+  aspect-ratio: 16/10;
+  border-radius: 18px;
+  filter: blur(18px);
+  opacity: .45;
+  transform: translateY(18px) scale(.96);
+  background: radial-gradient(circle at 50% 60%, rgba(0,0,0,.55), transparent 55%);
+  pointer-events: none;
+}
+
+.env-back{
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,204,102,.12));
+  border: 1px solid rgba(255,255,255,.14);
+}
+
+.env-front{
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.env-left, .env-right, .env-bottom{
+  position: absolute;
+  inset: 0;
+}
+
+.env-left{
+  background:
+    linear-gradient(135deg,
+      transparent 48%,
+      rgba(255,255,255,.10) 49%,
+      rgba(255,255,255,.10) 51%,
+      transparent 52%);
+  clip-path: polygon(0 100%, 0 0, 55% 55%, 0 100%);
+  opacity: .9;
+}
+
+.env-right{
+  background:
+    linear-gradient(225deg,
+      transparent 48%,
+      rgba(255,255,255,.10) 49%,
+      rgba(255,255,255,.10) 51%,
+      transparent 52%);
+  clip-path: polygon(100% 100%, 100% 0, 45% 55%, 100% 100%);
+  opacity: .9;
+}
+
+.env-bottom{
+  background: rgba(0,0,0,.10);
+  clip-path: polygon(0 100%, 50% 55%, 100% 100%, 0 100%);
+  opacity: .55;
+}
+
+.env-seal{
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  border-radius: 999px;
+  left: 50%;
+  top: 57%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 30% 30%, rgba(255,204,102,.85), rgba(255,204,102,.18));
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+/* Flap */
+.env-flap{
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  transform-origin: 50% 20%;
+  transform: rotateX(0deg);
+  transition: transform 520ms cubic-bezier(.2,.9,.2,1);
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  border: 1px solid rgba(255,255,255,.12);
+  clip-path: polygon(0 0, 100% 0, 50% 58%);
+  pointer-events: none;
+}
+
+/* Letter */
+.letter{
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 8%;
+  height: 74%;
+  border-radius: 14px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+  transform: translateY(18px);
+  transition: transform 760ms cubic-bezier(.2,.9,.2,1);
+  z-index: 2;
+}
+
+.letter-top{
+  height: 14%;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  background: linear-gradient(180deg, rgba(0,0,0,.05), transparent);
+}
+
+.letter-body{
+  padding: 18px 18px 14px;
+  position: relative;
+}
+
+.letter-line{
+  height: 10px;
+  border-radius: 8px;
+  background: rgba(0,0,0,.07);
+  margin: 10px 0;
+}
+
+.letter-line.w60{ width: 60%; }
+.letter-line.w85{ width: 85%; }
+.letter-line.w75{ width: 75%; }
+.letter-line.w55{ width: 55%; }
+
+.letter-stamp{
+  position: absolute;
+  right: 16px;
+  bottom: 10px;
+  width: 58px;
+  height: 58px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(255,204,102,.55), rgba(255,204,102,.18));
+  border: 1px solid rgba(0,0,0,.08);
+  transform: rotate(6deg);
+}
+
+/* Opening animation */
+.envelope.is-opening .env-flap{
+  transform: rotateX(155deg);
+}
+
+.envelope.is-opening .letter{
+  transform: translateY(-88px);
+}
+
+/* Optional: small fade of hint during open */
+.envelope.is-opening ~ .env-hint{
+  opacity: .25;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .env-flap, .letter{ transition: none; }
+}
+#envelope { transform-style: preserve-3d; }
+#flap { transform-style: preserve-3d; }

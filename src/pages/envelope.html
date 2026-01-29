@@ -1,1 +1,39 @@
-<div class="envelope" onclick="goHome()">
+<div class="envelope-stage">
+  <div class="envelope-wrap">
+    <button class="envelope-btn" id="openEnvelope" aria-label="Umschlag öffnen">
+      <div class="env-shadow"></div>
+
+      <div class="envelope" id="envelope">
+        <div class="env-back"></div>
+
+        <!-- Brief -->
+        <div class="letter" id="letter">
+          <div class="letter-top"></div>
+          <div class="letter-body">
+            <div class="letter-line w60"></div>
+            <div class="letter-line w85"></div>
+            <div class="letter-line w75"></div>
+            <div class="letter-line w55"></div>
+            <div class="letter-stamp"></div>
+          </div>
+        </div>
+
+        <!-- Umschlag-Front -->
+        <div class="env-front">
+          <div class="env-left"></div>
+          <div class="env-right"></div>
+          <div class="env-bottom"></div>
+          <div class="env-seal"></div>
+        </div>
+
+        <!-- Klappe -->
+        <div class="env-flap" id="flap"></div>
+      </div>
+
+      <div class="env-hint">
+        <div class="hint-title">Umschlag öffnen</div>
+        <div class="hint-sub">Klick. Dann passiert was.</div>
+      </div>
+    </button>
+  </div>
+</div>
