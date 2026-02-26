@@ -1,39 +1,79 @@
-<div class="envelope-stage">
-  <div class="envelope-wrap">
-    <button class="envelope-btn" id="openEnvelope" aria-label="Umschlag öffnen">
-      <div class="env-shadow"></div>
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Envelope</title>
+    <link rel="icon" href="/assets/favicon.ico" />
+    <link rel="stylesheet" href="/main.css" />
+  </head>
 
-      <div class="envelope" id="envelope">
-        <div class="env-back"></div>
+  <body class="is-envelope">
 
-        <!-- Brief -->
-        <div class="letter" id="letter">
-          <div class="letter-top"></div>
-          <div class="letter-body">
-            <div class="letter-line w60"></div>
-            <div class="letter-line w85"></div>
-            <div class="letter-line w75"></div>
-            <div class="letter-line w55"></div>
-            <div class="letter-stamp"></div>
+    </body>
+    <div class="page" data-page>
+      <!-- <header class="topbar">
+        <a class="brand" href="/pages/envelope.html">Wedding</a>
+        <nav class="nav">
+          <a href="/pages/home.html">Home</a>
+          <a href="/pages/ablauf.html">Ablauf</a>
+          <a href="/pages/ort.html">Ort</a>
+          <a href="/pages/unterkunft.html">Unterkunft</a>
+          <a href="/pages/rsvp.html">RSVP</a>
+        </nav>
+      </header> -->
+
+      <main class="container">
+        <!-- HERO -->
+        <section class="hero" data-hero>
+          <div class="heroMedia">
+            <div class="hGallery" data-hgallery>
+              <div class="hTrack" data-htrack>
+                <!-- Bilder werden per JS eingefügt -->
+              </div>
+            </div>
+            <div class="heroShade"></div>
           </div>
-        </div>
 
-        <!-- Umschlag-Front -->
-        <div class="env-front">
-          <div class="env-left"></div>
-          <div class="env-right"></div>
-          <div class="env-bottom"></div>
-          <div class="env-seal"></div>
-        </div>
+          <div class="heroCopy">
+            <h1 class="h1 heroTitle" data-reveal>Einladung</h1>
+            <p class="p heroLead" data-reveal>
+            </p>
 
-        <!-- Klappe -->
-        <div class="env-flap" id="flap"></div>
-      </div>
+            <div class="scrollHint" aria-hidden="true">
+              <span class="scrollPill">Scroll</span>
+              <span class="scrollLine"></span>
+            </div>
+          </div>
+        </section>
 
-      <div class="env-hint">
-        <div class="hint-title">Umschlag öffnen</div>
-        <div class="hint-sub">Klick. Dann passiert was.</div>
-      </div>
-    </button>
-  </div>
-</div>
+        <!-- SECTIONS -->
+        <section class="section" data-section>
+          <h2 class="sectionTitle" data-reveal>Überblick</h2>
+          <p class="sectionText" data-reveal>Kurzer Text. Keine Buttons. Nur Flow.</p>
+        </section>
+
+        <section class="section" data-section>
+          <h2 class="sectionTitle" data-reveal>Ablauf</h2>
+          <p class="sectionText" data-reveal>Details später. Wichtig ist: Scroll-Story.</p>
+        </section>
+
+        <section class="section" data-section>
+          <h2 class="sectionTitle" data-reveal>Ort</h2>
+          <p class="sectionText" data-reveal>Adresse / Anreise / Karte später.</p>
+        </section>
+
+        <section class="section" data-section>
+          <h2 class="sectionTitle" data-reveal>RSVP</h2>
+          <p class="sectionText" data-reveal>
+            Wenn du willst, kann hier später ein „RSVP“-Block erscheinen – aber ohne cheesy Button.
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
