@@ -1,150 +1,72 @@
 export function initUI() {
   const gsap = window.gsap;
-  if (!gsap) return;
+  if (!gsap) {
+    console.error("[wedding] GSAP not loaded");
+    return;
+  }
 
-  if (window.ScrollTrigger) gsap.registerPlugin(window.ScrollTrigger);
-  const ScrollTrigger = window.ScrollTrigger;
-  if (!ScrollTrigger) return;
+  const isHome = document.body.classList.contains("is-home");
+  if (!isHome) return;
 
-  // --- Scroll reveals (soft) ---
-  document.querySelectorAll("[data-reveal]").forEach((el) => {
-    gsap.fromTo(
-      el,
-      { opacity: 0, y: 16, filter: "blur(10px)" },
-      {
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 86%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-  });
+  const reel = document.querySelector("[data-reel]");
+  const panels = Array.from(document.querySelectorAll("[data-panel]"));
+  if (!reel || panels.length === 0) return;
 
-  // --- Horizontal Gallery pinned (pin the whole hero incl. text) ---
-  const hero = document.querySelector("[data-hero]");
-  const heroMedia = document.querySelector(".heroMedia");
-  const gallery = document.querySelector("[data-hgallery]");
-  const track = document.querySelector("[data-htrack]");
-  const shade = document.querySelector(".heroShade");
+  const files = ["01.jpeg","02.jpeg","03.jpg","04.jpeg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg"];
+  const urls = files.map(f => `/assets/img/intro/${f}`).slice(0, 10);
 
-  // Important: hero is required now
-  if (!(hero && heroMedia && gallery && track)) return;
-
-  const files = [
-    "01.jpeg","02.jpeg","03.jpg","04.jpeg","05.jpg",
-    "06.jpg","07.jpg","08.jpg","09.jpg","10.jpg"
-  ];
-  const urls = files.map((f) => `/assets/img/intro/${f}`);
-
-  // Build DOM once (HMR-safe)
-  track.innerHTML = "";
-  const imgs = [];
-
+  reel.innerHTML = "";
   urls.forEach((src) => {
-    const item = document.createElement("div");
-    item.className = "hItem";
+    const fr = document.createElement("div");
+    fr.className = "frame";
 
     const img = document.createElement("img");
     img.src = src;
     img.alt = "";
 
-    item.appendChild(img);
-    track.appendChild(item);
-    imgs.push(img);
+    fr.appendChild(img);
+    reel.appendChild(fr);
   });
 
-  const waitImages = () =>
-    Promise.all(
-      imgs.map(
-        (img) =>
-          new Promise((resolve) => {
-            if (img.complete) return resolve();
-            img.addEventListener("load", resolve, { once: true });
-            img.addEventListener("error", resolve, { once: true });
-          })
-      )
-    );
+  const setX = gsap.quickSetter(reel, "x", "px");
 
-  let hTrigger = null;
-  let hTween = null;
-  let shadeTween = null;
-
-  const build = () => {
-    // kill previous
-    if (hTrigger) hTrigger.kill();
-    if (hTween) hTween.kill();
-    if (shadeTween) shadeTween.kill();
-
-    // reset
-    gsap.set(track, { x: 0 });
-
-const maxX = track.scrollWidth - gallery.clientWidth;
-if (maxX <= 0) return;
-
-const endDistance = Math.round(maxX + 120);
-
-hTween = gsap.to(track, { x: -maxX, ease: "none", paused: true });
-
-hTrigger = ScrollTrigger.create({
-  id: "H_GALLERY",
-  trigger: hero,
-  start: "top top",
-  end: `+=${endDistance}`,
-  pin: true,
-  pinReparent: true,
-  pinSpacing: true,
-  scrub: true,
-  anticipatePin: 1,
-  invalidateOnRefresh: true,
-  animation: hTween,
-
-
-});
-
-    if (shade) {
-      shadeTween = gsap.fromTo(
-        shade,
-        { opacity: 1 },
-        { opacity: 0.7, ease: "none", paused: true }
-      );
-
-      ScrollTrigger.create({
-        id: "H_SHADE",
-        trigger: hero,
-        start: "top top+=0",
-        end: `+=${endDistance}`,
-        scrub: true,
-        animation: shadeTween,
-        invalidateOnRefresh: true,
-      });
-    }
+  const getStep = () => {
+    const first = reel.querySelector(".frame");
+    if (!first) return 0;
+    const gap = 12;
+    return first.getBoundingClientRect().width + gap;
   };
 
-  const buildAll = async () => {
-    await waitImages();
+  const updateReel = () => {
+    const frames = reel.querySelectorAll(".frame");
+    const frameCount = frames.length;
+    if (!frameCount || !panels.length) return;
+
+    const firstPanel = panels[0];
+    const lastPanel = panels[panels.length - 1];
+
+    const start = firstPanel.offsetTop;
+    const end = lastPanel.offsetTop + lastPanel.offsetHeight - window.innerHeight;
+
+    const rawProgress = (window.scrollY - start) / Math.max(1, end - start);
+    const progress = Math.max(0, Math.min(1, rawProgress));
+
+    const maxX = Math.max(0, (frameCount - 1) * getStep());
+    setX(-progress * maxX);
+  };
+
+  let ticking = false;
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        build();
-        ScrollTrigger.refresh();
-      });
+      ticking = false;
+      updateReel();
     });
   };
 
-  buildAll();
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
 
-  // Debounced resize
-  let t = null;
-  window.addEventListener("resize", () => {
-    clearTimeout(t);
-    t = setTimeout(() => {
-      build();
-      ScrollTrigger.refresh();
-    }, 200);
-  });
+  updateReel();
 }

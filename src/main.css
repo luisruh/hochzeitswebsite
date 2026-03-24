@@ -1,16 +1,14 @@
 :root{
-  --bg0:#fbf8ff;
-  --bg1:#f3efff;
-  --fg:#1f182a;
-  --muted:#5c4f73;
+  --bg0:#f4fff6;
+  --bg1:#e5fff0;
+  --fg:#0f1f15;
+  --muted: rgba(15,31,21,.58);
 
-  --border: rgba(31,24,42,.10);
-  --shadow: 0 18px 70px rgba(31,24,42,.10);
+  --a:#7a5cff;
+  --b:#d96bff;
 
-  --r: 22px;
-
-  --accent:#6b5cff;
-  --accent2:#ff6bd6;
+  --hair: rgba(15,31,21,.10);
+  --shadow: 0 18px 70px rgba(15,31,21,.10);
 }
 
 *{ box-sizing:border-box; }
@@ -21,230 +19,136 @@ body{
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
   color: var(--fg);
   background: var(--bg0);
+  overflow-x:hidden;
 }
 
-/* fixed background layer (no visible shifting during pin/scroll) */
 body::before{
   content:"";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
   background:
-    radial-gradient(900px 650px at 15% 10%, rgba(107,92,255,.18), transparent 60%),
-    radial-gradient(800px 600px at 70% 25%, rgba(255,107,214,.12), transparent 58%),
+    radial-gradient(900px 650px at 18% 12%, rgba(105,220,160,.30), transparent 60%),
+    radial-gradient(900px 650px at 78% 18%, rgba(122,92,255,.14), transparent 55%),
     linear-gradient(180deg, var(--bg0), var(--bg1));
 }
 
 .page{ min-height:100%; }
 
-/* topbar (optional) */
-.topbar{
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:16px;
-  padding:14px 16px;
-  background: rgba(255,255,255,.60);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-}
-.brand{
-  font-weight:780;
-  letter-spacing:.2px;
-  color: var(--fg);
-  text-decoration:none;
-}
-.nav{ display:flex; gap:10px; flex-wrap:wrap; }
-.nav a{
-  color: var(--muted);
-  text-decoration:none;
-  padding:8px 10px;
-  border-radius: 12px;
-}
-.nav a:hover{
-  color: var(--fg);
-  background: rgba(31,24,42,.06);
+/* ---------- Transition (fullscreen shutters) ---------- */
+.transition{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  pointer-events: none;
 }
 
-/* base layout */
-.container{
+.transition .shutter{
+  height: 100%;
+  background:
+    radial-gradient(900px 650px at 18% 12%, rgba(105,220,160,.36), transparent 60%),
+    radial-gradient(900px 650px at 78% 18%, rgba(122,92,255,.22), transparent 55%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+  transform: translateY(0);
+  transition: transform 1.1s ease;
+}
+
+.transition.is-hidden .shutter{
+  transform: translateY(-100%);
+}
+
+/* ---------- Home content ---------- */
+.home{
   max-width: 980px;
   margin: 0 auto;
-  padding: 28px 16px 70px;
+  padding: 28px 18px 90px;
 }
 
-.h1{
-  font-size: 56px;
-  margin: 0 0 10px;
-  letter-spacing: -0.6px;
+.s{
+  padding: 84px 0;
+  border-bottom: 1px dashed rgba(15,31,21,.14);
 }
-.p{
+.s h2{
+  margin:0 0 10px;
+  font-size: 32px;
+  letter-spacing: -.3px;
+}
+.hs{
+  font-size: 16px;
+}
+.s p{
+  margin:0;
   color: var(--muted);
-  font-size: 18px;
-  line-height: 1.6;
-  margin: 0;
-}
-@media (max-width: 760px){
-  .h1{ font-size: 40px; }
+  line-height: 1.7;
+  max-width: 62ch;
 }
 
-/* sections */
-.section{ padding: 64px 0; }
-.section + .section{ border-top: 1px dashed rgba(31,24,42,.12); }
-.sectionTitle{ font-size: 22px; margin: 0 0 8px; }
-.sectionText{ color: var(--muted); margin: 0; line-height: 1.7; }
+/* ---------- Full-width top strip gallery ---------- */
+.strip{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: clamp(120px, 18vh, 190px);
+  width: 100%;
+  overflow: hidden;
+  background: rgba(244,255,246,1);
+}
 
-/* HERO */
-.hero{
+.reel{
   position: relative;
-  padding: 18px 0 28px;
-  padding-bottom: 90px; /* reserve so pin feels stable */
+  z-index: 3;
+  height: 100%;
+  display:flex;
+  gap: 12px;
+  padding: 12px 0;
+  will-change: transform;
+  transform: translate3d(0,0,0);
 }
 
-.heroMedia{
-  position: relative;
-  border-radius: 28px;
+.frame{
+  flex: 0 0 clamp(160px, 22vw, 260px);
+  height: 100%;
+  border-radius: 0;
   overflow: hidden;
   border: none;
-  background: transparent;
   box-shadow: none;
-  height: min(62vh, 520px);
+  background: transparent;
 }
 
-/* shade must be positioned to cover heroMedia */
-.heroShade{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background: linear-gradient(180deg, rgba(0,0,0,.00), rgba(0,0,0,.10));
-}
-
-.heroCopy{
-  margin-top: 18px;
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap: 18px;
-}
-.heroTitle{ margin-top: 2px; }
-.heroLead{ max-width: 520px; }
-
-/* scroll hint */
-.scrollHint{
-  display:flex;
-  align-items:center;
-  gap: 12px;
-  margin-top: 10px;
-  color: rgba(31,24,42,.55);
-  user-select:none;
-}
-.scrollPill{
-  font-size: 12px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(31,24,42,.10);
-  background: rgba(255,255,255,.55);
-}
-.scrollLine{
-  width: 54px;
-  height: 1px;
-  background: rgba(31,24,42,.22);
-}
-
-/* remove old envelope card look if still referenced somewhere */
-.envelopeWrap, .envelopeBody, .kicker, .dot { display: none !important; }
-
-/* Horizontal scroll gallery */
-.hGallery{
-  position:absolute;
-  inset:0;
-  overflow:hidden;
-}
-
-.hTrack{
-  height:100%;
-  display:flex;
-  gap:16px;
-  padding:16px;
-  will-change: transform;
-  transform: translate3d(0,0,0); /* helps avoid subpixel jitter */
-}
-
-.hItem{
-  height:100%;
-  flex: 0 0 78%;
-  border-radius: 22px;
-  overflow:hidden;
-  border: 1px solid rgba(31,24,42,.10);
-  box-shadow: 0 18px 60px rgba(31,24,42,.10);
-  background: rgba(255,255,255,.18);
-}
-
-@media (max-width: 760px){
-  .hItem{ flex-basis: 92%; }
-}
-
-.hItem img{
+.frame img{
   width:100%;
   height:100%;
-  object-fit:cover;
-  transform: scale(1.02);
+  object-fit: cover;
+  display:block;
+  transform: scale(1.01);
 }
 
-.is-envelope .container{
-  max-width: none;
-  margin: 16px;
-
+/* ---------- Links ---------- */
+a{
+  color:#d259f4;
 }
 
-/* hero ohne Abstände */
-.is-envelope .hero{
-  margin: 0;
-  padding: 0;
+/* ---------- Welcome message ---------- */
+.welcome-message{
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
 }
 
-/* Band: bis zum rechten Rand ziehen (ohne 100vw Scrollbar-Tricks) */
-.is-envelope .heroMedia{
-  height: min(62vh, 520px);
-
-  border-radius: 0 !important;
-  overflow: hidden;
-
-  /* width: calc(100% + 16px);   kompensiert left padding */
-  /* margin-right: -16px;        /* zieht bis an den rechten Screen */
-  background: transparent;
+.welcome-message__inner{
+  text-align: center;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .45s ease, transform .8s ease;
 }
 
-/* keine Overlay-Farbe */
-.is-envelope .heroShade{
-  background: transparent !important;
+.welcome-message.is-hidden .welcome-message__inner{
+  opacity: 0;
+  transform: translateY(-80px);
 }
-
-/* Text bleibt unter dem Band, aber bleibt links eingerückt */
-.is-envelope .heroCopy{
-  position: static;
-  margin: 18px 0 0;
-  padding: 0;
-}
-
-/* Track: Gap bleibt, aber keine “Box” sichtbar */
-.is-envelope .hTrack{
-  padding: 0;
-  gap: 16px;                 /* Abstand ok */
-  background: transparent;
-}
-
-/* Items: keine runden Ecken, kein Card-Look */
-.is-envelope .hItem{
-  border: none;
-  box-shadow: none;
-  background: transparent;
-  border-radius: 0 !important;
-}
-
-/* falls du trotz allem eine horizontale Scrollbar bekommst */
-html, body { overflow-x: hidden; }
