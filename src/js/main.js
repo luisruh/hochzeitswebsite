@@ -25,3 +25,20 @@ setTimeout(() => {
     transition.remove();
   }
 }, 5000);
+
+function updateCountdown() {
+  const weddingDate = new Date('2027-08-21T00:00:00').getTime();
+  const now = Date.now();
+  const diff = weddingDate - now;
+
+  if (diff <= 0) return;
+
+  document.getElementById('days').textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById('hours').textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  document.getElementById('minutes').textContent = Math.floor((diff / 1000 / 60) % 60);
+  document.getElementById('seconds').textContent = Math.floor((diff / 1000) % 60);
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+

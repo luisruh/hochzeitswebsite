@@ -9,36 +9,53 @@ export function initUI() {
   if (!isHome) return;
 
   const reel = document.querySelector("[data-reel]");
-  const panels = Array.from(document.querySelectorAll("[data-panel]"));
+  const home = document.querySelector(".home");
+  const panels = home ? Array.from(home.querySelectorAll("[data-panel]")) : [];
   if (!reel || panels.length === 0) return;
 
-  const files = ["01.jpeg","02.jpeg","03.jpg","04.jpeg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg"];
-  const urls = files.map(f => `/assets/img/intro/${f}`).slice(0, 10);
+  const files = [
+    "01.jpeg","02.jpeg","03.jpg","04.jpeg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg",
+    "10.jpeg","11.jpeg","12.jpg","13.jpeg","14.jpeg","15.jpeg","16.jpg","17.jpg","18.jpg",
+    "19.jpg","20.jpeg","21.jpg","22.jpeg","23.jpg"
+  ];
 
   reel.innerHTML = "";
-  urls.forEach((src) => {
+
+  files.forEach((file) => {
     const fr = document.createElement("div");
     fr.className = "frame";
 
     const img = document.createElement("img");
-    img.src = src;
+    img.src = `/assets/img/intro/${file}`;
     img.alt = "";
 
     fr.appendChild(img);
     reel.appendChild(fr);
   });
 
-  const setX = gsap.quickSetter(reel, "x", "px");
+  const frames = Array.from(reel.querySelectorAll(".frame"));
+  const images = frames.map(frame => frame.querySelector("img"));
 
-  const getStep = () => {
-    const first = reel.querySelector(".frame");
-    if (!first) return 0;
-    const gap = 12;
-    return first.getBoundingClientRect().width + gap;
+  const setReelX = gsap.quickSetter(reel, "x", "px");
+
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+  const updateImageShift = () => {
+    const viewportCenter = window.innerWidth / 2;
+    const influence = window.innerWidth / 2 + 200;
+
+    frames.forEach((frame, index) => {
+      const rect = frame.getBoundingClientRect();
+      const frameCenter = rect.left + rect.width / 2;
+
+      const relative = clamp((frameCenter - viewportCenter) / influence, -1, 1);
+
+      const x = -50 + (relative * 16);
+      images[index].style.transform = `translateX(${x}%)`;
+    });
   };
 
   const updateReel = () => {
-    const frames = reel.querySelectorAll(".frame");
     const frameCount = frames.length;
     if (!frameCount || !panels.length) return;
 
@@ -46,19 +63,25 @@ export function initUI() {
     const lastPanel = panels[panels.length - 1];
 
     const start = firstPanel.offsetTop;
-    const end = lastPanel.offsetTop + lastPanel.offsetHeight - window.innerHeight;
+    const end = Math.max(
+      start + 1,
+      lastPanel.offsetTop + lastPanel.offsetHeight - window.innerHeight
+    );
 
-    const rawProgress = (window.scrollY - start) / Math.max(1, end - start);
-    const progress = Math.max(0, Math.min(1, rawProgress));
+    const rawProgress = (window.scrollY - start) / (end - start);
+    const progress = clamp(rawProgress, 0, 1);
 
-    const maxX = Math.max(0, (frameCount - 1) * getStep());
-    setX(-progress * maxX);
+    const maxX = Math.max(0, reel.scrollWidth - window.innerWidth);
+    setReelX(-progress * maxX);
+
+    updateImageShift();
   };
 
   let ticking = false;
   const requestUpdate = () => {
     if (ticking) return;
     ticking = true;
+
     requestAnimationFrame(() => {
       ticking = false;
       updateReel();
