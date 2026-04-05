@@ -4,8 +4,7 @@
   --fg:#0f1f15;
   --muted: rgba(15,31,21,.58);
 
-  --a:#7a5cff;
-  --b:#d96bff;
+  --b:rgba(36, 100, 69, 1);
 
   --hair: rgba(15,31,21,.10);
   --shadow: 0 18px 70px rgba(15,31,21,.10);
@@ -108,7 +107,7 @@ body::before{
   height: 100%;
   display: flex;
   gap: 12px;
-  padding: 12px 0;
+  padding: 12px 12px 12px 12px;
   will-change: transform;
   transform: translate3d(0,0,0);
 }
@@ -138,7 +137,7 @@ body::before{
 
 /* ---------- Links ---------- */
 a{
-  color:#d259f4;
+  color: var(--b);
 }
 
 /* ---------- Welcome message ---------- */
@@ -182,8 +181,9 @@ a{
 }
 
 .s .image img{
-  width: 150px;
-  height: 150px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 300px;
   object-fit: cover;
 }
 
@@ -218,19 +218,41 @@ a{
   background: linear-gradient(
     to bottom,
     rgba(229, 255, 240, 0.0) 0%,
-    rgba(229, 255, 240, 0.50) 3%,
-    rgba(217,107,255,0.80) 25%,
-    rgba(217,107,255,0.9) 90%,
-    rgba(217,107,255,0.98) 100%
+    rgba(36, 100, 69, 0.92) 30%,
+    rgba(36, 100, 69, 0.95) 90%,
+    rgba(36, 100, 69, 0.97) 100%
   );
+}
+
+.welcome-line{
+  width: min(180px, 38vw);
+  height: 1.5px;
+  background: linear-gradient(
+    90deg,
+    rgba(217,107,255,0) 0%,
+    var(--b) 20%,
+    var(--b)   80%,
+    rgba(122,92,255,0) 100%
+  );
+  opacity: .95;
+}
+
+.welcome-message__inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:18px;
+  padding:24px;
 }
 
 .future-teaser__lines{
   display: grid;
-  gap: 2.5rem;
-  transform: rotate(-8deg);
+  gap: 5.5rem;
+  transform: rotate(-3deg);
   text-align: center;
-  color: white;
+  color: var(--bg1);
   font-size: clamp(1.2rem, 3vw, 2.6rem);
   font-weight: 700;
   text-transform: uppercase;
@@ -238,3 +260,44 @@ a{
   opacity: 0.95;
   width: 100%;
 }
+
+/* Headline */
+.welcome-message__inner h1{
+  margin:0;
+  font-family: "Notable", sans-serif;
+  letter-spacing: 0.08em;
+  font-size: clamp(3.2rem, 8vw, 6.4rem);
+  font-weight: 500;
+  line-height: .95;
+  letter-spacing: 0.04em;
+  animation: titleSpacing 3.2s ease forwards;
+}
+
+/* Datum */
+.welcome-message__inner p{
+  margin:0;
+  font-size: clamp(.95rem, 1.8vw, 1.1rem);
+  line-height:1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@keyframes titleSpacing{
+  from{
+    letter-spacing: 0.2em;
+  }
+  to{
+    letter-spacing: 0.5em;
+  }
+}
+
+.welcome-message{
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+.fonts-loaded .welcome-message{
+  opacity: 1;
+}
+
