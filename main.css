@@ -1,10 +1,10 @@
 :root{
   --bg0:#f4fff6;
-  --bg1:#e5fff0;
+  --bg1:#e91a1a;
   --fg:#0f1f15;
   --muted: rgba(15,31,21,.58);
 
-  --b:rgba(36, 100, 69, 1);
+  --b:rgb(100, 36, 36);
 
   --hair: rgba(15,31,21,.10);
   --shadow: 0 18px 70px rgba(15,31,21,.10);
