@@ -95,7 +95,7 @@ body::before{
   position: sticky;
   top: 0;
   z-index: 20;
-  height: clamp(120px, 18vh, 190px);
+  height: clamp(140px, 20vh, 180px);
   width: 100%;
   overflow: hidden;
   background: rgba(244,255,246,1);
@@ -114,7 +114,7 @@ body::before{
 
 .frame{
   position: relative;
-  flex: 0 0 clamp(110px, 14vw, 170px);
+  flex: 0 0 clamp(90px, 14vw, 170px);
   height: 100%;
   overflow: hidden;
 }
@@ -288,7 +288,7 @@ a{
     letter-spacing: 0.2em;
   }
   to{
-    letter-spacing: 0.5em;
+    letter-spacing: 0.9em;
   }
 }
 

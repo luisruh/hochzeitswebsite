@@ -10,7 +10,7 @@ setTimeout(() => {
   if (welcomeMessage) {
     welcomeMessage.classList.add("is-hidden");
   }
-}, 2500);
+}, 3500);
 
 setTimeout(() => {
   shutters.forEach((shutter, i) => {
@@ -18,13 +18,13 @@ setTimeout(() => {
       shutter.style.transform = "translateY(-100%)";
     }, i * 180);
   });
-}, 3000);
+}, 4000);
 
 setTimeout(() => {
   if (transition) {
     transition.remove();
   }
-}, 5000);
+}, 6000);
 
 function updateCountdown() {
   const weddingDate = new Date('2027-08-21T00:00:00').getTime();
@@ -41,4 +41,3 @@ function updateCountdown() {
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
-

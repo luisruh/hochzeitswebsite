@@ -9,12 +9,11 @@ export function initUI() {
   if (!isHome) return;
 
   const reel = document.querySelector("[data-reel]");
-  const home = document.querySelector(".home");
-  const panels = home ? Array.from(home.querySelectorAll("[data-panel]")) : [];
+  const panels = Array.from(document.querySelectorAll("[data-panel]"));
   if (!reel || panels.length === 0) return;
 
   const files = [
-    "01.jpeg","02.jpeg","03.jpg","04.jpeg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg",
+    "01.jpg","02.jpeg","03.jpeg","04.jpeg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg",
     "10.jpeg","11.jpeg","12.jpg","13.jpeg","14.jpeg","15.jpeg","16.jpg","17.jpg","18.jpg",
     "19.jpg","20.jpeg","21.jpg","22.jpeg","23.jpg"
   ];
@@ -37,45 +36,34 @@ export function initUI() {
   const images = frames.map(frame => frame.querySelector("img"));
 
   const setReelX = gsap.quickSetter(reel, "x", "px");
-
   const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
-  const updateImageShift = () => {
-    const viewportCenter = window.innerWidth / 2;
-    const influence = window.innerWidth / 2 + 200;
+const updateImageShift = () => {
+  const viewportCenter = window.innerWidth / 2;
+  const influence = window.innerWidth / 2 - 60;
 
-    frames.forEach((frame, index) => {
-      const rect = frame.getBoundingClientRect();
-      const frameCenter = rect.left + rect.width / 2;
+  frames.forEach((frame, index) => {
+    const rect = frame.getBoundingClientRect();
+    const frameCenter = rect.left + rect.width / 2;
+    const relative = clamp((frameCenter - viewportCenter) / influence, -1, 1);
+    const x = -50 + (relative * 16);
+    images[index].style.transform = `translateX(${x}%)`;
+  });
+};
 
-      const relative = clamp((frameCenter - viewportCenter) / influence, -1, 1);
+const updateReel = () => {
+  const start = panels[0].offsetTop;
 
-      const x = -50 + (relative * 16);
-      images[index].style.transform = `translateX(${x}%)`;
-    });
-  };
+  const end = document.body.scrollHeight - window.innerHeight;
 
-  const updateReel = () => {
-    const frameCount = frames.length;
-    if (!frameCount || !panels.length) return;
+  const rawProgress = (window.scrollY - start) / (end - start);
+  const progress = clamp(rawProgress, 0, 1);
 
-    const firstPanel = panels[0];
-    const lastPanel = panels[panels.length - 1];
+  const maxX = Math.max(0, reel.scrollWidth - window.innerWidth);
+  setReelX(-progress * maxX);
 
-    const start = firstPanel.offsetTop;
-    const end = Math.max(
-      start + 1,
-      lastPanel.offsetTop + lastPanel.offsetHeight - window.innerHeight
-    );
-
-    const rawProgress = (window.scrollY - start) / (end - start);
-    const progress = clamp(rawProgress, 0, 1);
-
-    const maxX = Math.max(0, reel.scrollWidth - window.innerWidth);
-    setReelX(-progress * maxX);
-
-    updateImageShift();
-  };
+  updateImageShift();
+};
 
   let ticking = false;
   const requestUpdate = () => {
