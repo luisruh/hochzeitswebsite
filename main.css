@@ -273,7 +273,7 @@ a{
   animation: titleSpacing 3.2s ease forwards;
 }
 
-/* Datum */
+/* Datum
 .welcome-message__inner p{
   margin:0;
   font-size: clamp(.95rem, 1.8vw, 1.1rem);
@@ -281,16 +281,16 @@ a{
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
-}
+} */
 
-@keyframes titleSpacing{
+/* @keyframes titleSpacing{
   from{
-    letter-spacing: 0.2em;
+    letter-spacing: 0.15em;
   }
   to{
-    letter-spacing: 0.5em;
+    letter-spacing: 0.9em;
   }
-}
+} */
 
 .welcome-message{
   opacity: 0;
