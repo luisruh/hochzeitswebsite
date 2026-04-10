@@ -1,10 +1,10 @@
 :root{
   --bg0:#f4fff6;
-  --bg1:#e91a1a;
+  --bg1:#e5fff0;
   --fg:#0f1f15;
   --muted: rgba(15,31,21,.58);
 
-  --b:rgb(100, 36, 36);
+  --b:rgba(36, 100, 69, 1);
 
   --hair: rgba(15,31,21,.10);
   --shadow: 0 18px 70px rgba(15,31,21,.10);
@@ -273,7 +273,7 @@ a{
   animation: titleSpacing 3.2s ease forwards;
 }
 
-/* Datum
+/* Datum */
 .welcome-message__inner p{
   margin:0;
   font-size: clamp(.95rem, 1.8vw, 1.1rem);
@@ -281,16 +281,16 @@ a{
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
-} */
+}
 
-/* @keyframes titleSpacing{
+@keyframes titleSpacing{
   from{
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
   }
   to{
-    letter-spacing: 0.9em;
+    letter-spacing: 0.5em;
   }
-} */
+}
 
 .welcome-message{
   opacity: 0;
