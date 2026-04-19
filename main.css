@@ -87,7 +87,6 @@ body::before{
 }
 
 .s{
-  padding: 84px 0;
   border-bottom: 1px dashed var(--hair);
 }
 
