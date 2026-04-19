@@ -87,7 +87,12 @@ body::before{
 }
 
 .s{
+  padding: 84px 0;
   border-bottom: 1px dashed var(--hair);
+}
+
+.future-teaser__inner .s:first-child{
+  padding-top: 0;
 }
 
 .s h2{
