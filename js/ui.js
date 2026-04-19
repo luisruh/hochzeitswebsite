@@ -14,8 +14,8 @@ export function initUI() {
 
   const files = [
     "01.jpg","02.jpg","03.jpeg","04.jpeg","05.jpeg","06.jpg","07.jpg","08.jpg","09.jpg",
-    "10.jpeg","11.jpeg","12.jpg","13.jpeg","14.jpeg","15.jpeg","16.jpg","17.jpg","18.jpg",
-    "19.jpg","20.jpeg","21.jpg","22.jpeg","23.jpg"
+    "10.jpeg","11.jpg","12.jpg","13.jpeg","14.jpeg","15.jpeg","16.jpg","17.jpg","18.jpg",
+    "19.jpg","20.jpeg","21.jpg","22.jpeg","23.jpg", "23.jpg" ,"23.jpg"
   ];
 
   reel.innerHTML = "";
