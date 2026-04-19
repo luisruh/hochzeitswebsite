@@ -23,6 +23,14 @@
   --teal-rgb: 11,57,72;
 }
 
+@font-face {
+  font-family: "Notable";
+  src: url("/assets/fonts/Notable-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 *{ box-sizing:border-box; }
 html,body{ height:100%; }
 
