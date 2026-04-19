@@ -5,7 +5,6 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Stine & Luis Hochzeit
 X-WR-TIMEZONE:Europe/Vienna
-X-PUBLISHED-TTL:PT1H
 
 BEGIN:VTIMEZONE
 TZID:Europe/Vienna
@@ -35,20 +34,21 @@ LAST-MODIFIED:20260419T120000Z
 DTSTART;TZID=Europe/Vienna:20270821T120000
 DTEND;TZID=Europe/Vienna:20270822T120000
 SUMMARY:Stine & Luis Hochzeit
+
 LOCATION:Landgasthof Wildwasser
-DESCRIPTION:Stine & Luis feiern Hochzeit.\\n\\nWir freuen uns sehr\, diesen besonderen Tag mit euch zu verbringen.\\nAlle Details und Updates findet ihr hier: https://stineundluis.de
-X-ALT-DESC;FMTTYPE=text/html:<!DOCTYPE html><html><body style="margin:0;padding:0;font-family:Arial\,sans-serif;color:#0b3948;background:#ffffff;"><div style="padding:20px;"><h2 style="margin:0 0 12px 0;font-size:22px;font-weight:600;">Stine &amp; Luis Hochzeit</h2><p style="margin:0 0 10px 0;font-size:15px;line-height:1.6;">Wir freuen uns sehr\, diesen besonderen Tag mit euch zu verbringen.</p><p style="margin:0 0 10px 0;font-size:15px;line-height:1.6;">Alle Details und Updates findet ihr hier:</p><p style="margin:0;font-size:15px;line-height:1.6;"><a href="https://stineundluis.de" style="color:#a56e86;text-decoration:none;">stineundluis.de</a></p></div></body></html>
+
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-APPLE-RADIUS=100;X-TITLE=Landgasthof Wildwasser:geo:0,0?q=Landgasthof+Wildwasser
+
+DESCRIPTION:Stine & Luis feiern Hochzeit.\n\nWir freuen uns sehr\, diesen besonderen Tag mit euch zu verbringen.\n\nWebsite: https://stineundluis.de\nGoogle Maps: https://www.google.com/maps/search/?api=1&query=Landgasthof+Wildwasser
+
+URL:https://stineundluis.de
+
 STATUS:CONFIRMED
 TRANSP:OPAQUE
 CLASS:PUBLIC
 PRIORITY:5
 ORGANIZER;CN=Stine & Luis:mailto:stineundluis@gmail.com
-ATTENDEE;CN=Stine & Luis;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;RSVP=FALSE:mailto:stineundluis@gmail.com
-CATEGORIES:Hochzeit,Privat,Blocker
-X-MICROSOFT-CDO-BUSYSTATUS:BUSY
-X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
-X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
-X-MICROSOFT-CDO-IMPORTANCE:1
+CATEGORIES:Hochzeit,Privat
 
 BEGIN:VALARM
 ACTION:DISPLAY
