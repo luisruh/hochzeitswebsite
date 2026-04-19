@@ -31,15 +31,19 @@ SEQUENCE:0
 DTSTAMP:20260419T120000Z
 CREATED:20260419T120000Z
 LAST-MODIFIED:20260419T120000Z
+
 DTSTART;TZID=Europe/Vienna:20270821T120000
 DTEND;TZID=Europe/Vienna:20270822T120000
+
 SUMMARY:Stine & Luis Hochzeit
 
 LOCATION:Landgasthof Wildwasser
 
-X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-APPLE-RADIUS=100;X-TITLE=Landgasthof Wildwasser:geo:0,0?q=Landgasthof+Wildwasser
+GEO:52.6958;9.98358
 
-DESCRIPTION:Stine & Luis feiern Hochzeit.\n\nWir freuen uns sehr\, diesen besonderen Tag mit euch zu verbringen.\n\nWebsite: https://stineundluis.de\nGoogle Maps: https://www.google.com/maps/search/?api=1&query=Landgasthof+Wildwasser
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-APPLE-RADIUS=100;X-TITLE=Landgasthof Wildwasser:geo:52.6958,9.98358
+
+DESCRIPTION:Stine & Luis feiern Hochzeit.\n\nWir freuen uns sehr\, diesen besonderen Tag mit euch zu verbringen.\n\nWebsite: https://stineundluis.de\nGoogle Maps: https://www.google.com/maps/place/Landgasthof+Wildwasser
 
 URL:https://stineundluis.de
 
@@ -47,13 +51,14 @@ STATUS:CONFIRMED
 TRANSP:OPAQUE
 CLASS:PUBLIC
 PRIORITY:5
+CATEGORIES:Hochzeit
+
 ORGANIZER;CN=Stine & Luis:mailto:stineundluis@gmail.com
-CATEGORIES:Hochzeit,Privat
 
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:In einem Monat: Stine & Luis Hochzeit
-TRIGGER:-P1M
+TRIGGER:-P30D
 END:VALARM
 
 BEGIN:VALARM
