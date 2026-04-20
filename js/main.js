@@ -9,31 +9,32 @@ function startIntro() {
     if (welcomeMessage) {
       welcomeMessage.classList.add("is-hidden");
     }
-  }, 3500);
+  }, 4000);
 
   setTimeout(() => {
     shutters.forEach((shutter, i) => {
       setTimeout(() => {
         shutter.style.transform = "translateY(-100%)";
-      }, i * 180);
+      }, i * 250);
     });
-  }, 4000);
+  }, 4100);
 
   setTimeout(() => {
     if (transition) {
       transition.remove();
     }
-  }, 6000);
+  }, 7000);
 }
 
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
+    requestAnimationFrame(async () => {
+      const ui = await initUI();
       startIntro();
 
-      setTimeout(() => {
-        initUI();
-      }, 1600);
+      if (ui && typeof ui.start === "function") {
+        ui.start();
+      }
     });
   });
 });
@@ -45,10 +46,17 @@ function updateCountdown() {
 
   if (diff <= 0) return;
 
-  document.getElementById("days").textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
-  document.getElementById("hours").textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  document.getElementById("minutes").textContent = Math.floor((diff / 1000 / 60) % 60);
-  document.getElementById("seconds").textContent = Math.floor((diff / 1000) % 60);
+  const daysEl = document.getElementById("days");
+  const hoursEl = document.getElementById("hours");
+  const minutesEl = document.getElementById("minutes");
+  const secondsEl = document.getElementById("seconds");
+
+  if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
+  daysEl.textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+  hoursEl.textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  minutesEl.textContent = Math.floor((diff / 1000 / 60) % 60);
+  secondsEl.textContent = Math.floor((diff / 1000) % 60);
 }
 
 updateCountdown();
