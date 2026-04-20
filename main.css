@@ -148,6 +148,7 @@ body::before{
   width: auto;
   transform: translateX(-50%);
   will-change: transform;
+  backface-visibility: hidden;
 }
 
 /* ---------- Links ---------- */
