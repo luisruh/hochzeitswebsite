@@ -69,7 +69,7 @@ setInterval(updateCountdown, 1000);
 // ------------------------------------------------------------
 const quizQuestions = [
   {
-    question: "Welcher Artist ist bei Stine und Luis jeweils in den Spotify-All-Time-Top-5?",
+    question: "Welcher Künstler ist bei Stine und Luis jeweils in den Spotify-All-Time-Top-5?",
     answers: ["Ikkimel", "Twentyone Pilots", "Bad Bunny"],
     correct: 1,
   },
