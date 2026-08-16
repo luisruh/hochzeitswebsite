@@ -85,7 +85,7 @@ const quizQuestions = [
   },
   {
     question: "Wo war unser erster gemeinsamer Urlaub?",
-    answers: ["Teneriffa - auf der Heimatinsel vom Onkel Can", "Vietnam", "Camping Platz Klausdorf auf Fehmarn"],
+    answers: ["Teneriffa - auf der Heimatinsel vom Onkel Can", "Vietnam - Pho-tastisch wars", "Premium **** Camping Platz Klausdorf auf Fehmarn"],
     correct: 0,
   },
   {
