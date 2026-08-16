@@ -364,12 +364,19 @@ a{
   font-weight: 650;
 }
 
-.quiz__answer:hover,
 .quiz__answer:focus-visible{
   transform: translateY(-2px);
   border-color: var(--b);
   background: rgba(var(--blue-rgb), .10);
   outline: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .quiz__answer:hover{
+    transform: translateY(-2px);
+    border-color: var(--b);
+    background: rgba(var(--blue-rgb), .10);
+  }
 }
 
 .quiz__answer:active{

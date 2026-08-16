@@ -168,9 +168,17 @@ function initQuiz() {
   }
 
   function selectAnswer(index) {
-    if (index === quizQuestions[currentQuestion].correct) score += 1;
+    if (index === quizQuestions[currentQuestion].correct) {
+      score += 1;
+    }
+
+    // Entfernt den Fokus vom angetippten Button
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
 
     currentQuestion += 1;
+
     if (currentQuestion < quizQuestions.length) {
       renderQuestion();
     } else {
