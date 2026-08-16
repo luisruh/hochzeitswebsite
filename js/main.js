@@ -76,7 +76,7 @@ const quizQuestions = [
   {
     question: "Wann feiern Stine und Luis Jahrestag?",
     answers: ["25.07. - Am offiziellen Jakobstag", "16.08. - Madonnas Geburtstag", "21.08. - im Jahr 1876: Die Wiener Reichsbrücke wird unter dem Namen Kronprinz-Rudolf-Brücke eingeweiht."],
-    correct: 0,
+    correct: 1,
   },
   {
     question: "An welchem Wochentag wurden Stine und Luis geboren?",
@@ -85,8 +85,8 @@ const quizQuestions = [
   },
   {
     question: "Wo war unser erster gemeinsamer Urlaub?",
-    answers: ["Teneriffa - auf der Heimatinsel vom Onkel Can", "Vietnam - Pho-tastisch wars", "Premium **** Camping Platz Klausdorf auf Fehmarn"],
-    correct: 0,
+    answers: ["Vietnam - Pho-tastisch wars", "Premium **** Camping Platz Klausdorf auf Fehmarn", "Teneriffa - auf der Heimatinsel vom Onkel Can"],
+    correct: 2,
   },
   {
     question: "Welches Lied verbindet uns am meisten?",
