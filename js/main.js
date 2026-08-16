@@ -113,6 +113,11 @@ const quizQuestions = [
     answers: ["Utz utz utz", "Lalalala", "Klingelingeling"],
     correct: 0,
   },
+  {
+  question: "Welchen Spitznamen nutzt Stine für Luis am meinsten?",
+  answers: ["Fliegenpilz", "Nudelberg", "Dudelsack"],
+  correct: 0,
+},
 ];
 
 const quizResults = {
