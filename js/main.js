@@ -69,6 +69,16 @@ setInterval(updateCountdown, 1000);
 // ------------------------------------------------------------
 const quizQuestions = [
   {
+    question: "Wo fand der Antrag statt?",
+    answers: ["Im Ski Urlaub in der Gondel", "Im Lieblingsrestaurant mit Ring im Sektglas", "Weinberg Kahlenberg bei 36 Grad"],
+    correct: 2,
+  },
+  {
+    question: "Wo haben wir uns kennengelernt?",
+    answers: ["Bei den Bundesjugendspielen", "Bei Ihrem Reifenhersteller des Vertrauen: Continental", "Beim Konfirmandenunterricht"],
+    correct: 1,
+  },
+  {
     question: "Welcher Künstler ist bei Stine und Luis jeweils in den Spotify-All-Time-Top-5?",
     answers: ["Ikkimel", "Twentyone Pilots", "Bad Bunny"],
     correct: 1,
@@ -91,16 +101,6 @@ const quizQuestions = [
   {
     question: "Welches Lied verbindet uns am meisten?",
     answers: ["Jedes Lied vom Trancefloor auf der Fusion", "Kippe von Ennio", "All of Me von John Legend"],
-    correct: 1,
-  },
-  {
-    question: "Wo fand der Antrag statt?",
-    answers: ["Im Ski Urlaub in der Gondel", "Im Lieblingsrestaurant mit Ring im Sektglas", "Weinberg Kahlenberg bei 36 Grad"],
-    correct: 2,
-  },
-  {
-    question: "Wo haben wir uns kennengelernt?",
-    answers: ["Bei den Bundesjugendspielen", "Bei Ihrem Reifenhersteller des Vertrauen: Continental", "Beim Konfirmandenunterricht"],
     correct: 1,
   },
   {
