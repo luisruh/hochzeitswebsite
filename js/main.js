@@ -5,38 +5,34 @@ function startIntro() {
   const shutters = transition ? Array.from(transition.querySelectorAll(".shutter")) : [];
   const welcomeMessage = document.getElementById("welcomeMessage");
 
-  setTimeout(() => {
-    if (welcomeMessage) {
-      welcomeMessage.classList.add("is-hidden");
-    }
-  }, 4000);
+  // Beim Zurückkehren zur Startseite das Intro überspringen.
+  if (document.documentElement.classList.contains("intro-skipped")) {
+    transition?.remove();
+    welcomeMessage?.remove();
+    return;
+  }
 
+  try {
+    localStorage.setItem("weddingIntroSeen", "1");
+    sessionStorage.setItem("weddingIntroSeen", "1");
+  } catch (_) {}
+  setTimeout(() => welcomeMessage?.classList.add("is-hidden"), 4000);
   setTimeout(() => {
     shutters.forEach((shutter, i) => {
-      setTimeout(() => {
-        shutter.style.transform = "translateY(-100%)";
-      }, i * 250);
+      setTimeout(() => { shutter.style.transform = "translate3d(0, -100%, 0)"; }, i * 250);
     });
   }, 4100);
-
   setTimeout(() => {
-    if (transition) {
-      transition.remove();
-    }
+    transition?.remove();
+    welcomeMessage?.remove();
   }, 7000);
 }
 
-window.addEventListener("load", async () => {
-  requestAnimationFrame(() => {
-    requestAnimationFrame(async () => {
-      const ui = await initUI();
-      startIntro();
-
-      if (ui && typeof ui.start === "function") {
-        ui.start();
-      }
-    });
-  });
+// Intro nicht mehr vom Laden aller 25 Bilder abhängig machen.
+// Fotoleiste wird unabhängig initialisiert.
+window.addEventListener("DOMContentLoaded", () => {
+  startIntro();
+  initUI().then(ui => ui?.start?.()).catch(console.error);
 });
 
 function updateCountdown() {
@@ -222,8 +218,10 @@ function initQuiz() {
 initQuiz();
 
 
+// Back/forward-cache: Seite unverändert wiederherstellen, kein Reload nötig.
 window.addEventListener("pageshow", (event) => {
   if (event.persisted) {
-    window.location.reload();
+    document.querySelector("[data-transition]")?.remove();
+    document.getElementById("welcomeMessage")?.remove();
   }
 });

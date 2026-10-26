@@ -16,6 +16,13 @@
     <meta property="og:url" content="https://stineundluis.de/" />
     <meta property="og:type" content="website" />
     <script>
+      // Nur beim allerersten Besuch dieses Browsers das Intro zeigen.
+      try {
+        if (localStorage.getItem("weddingIntroSeen") === "1" ||
+            sessionStorage.getItem("weddingIntroSeen") === "1") {
+          document.documentElement.classList.add("intro-skipped");
+        }
+      } catch (_) {}
       document.fonts.ready.then(() => {
         document.documentElement.classList.add("fonts-loaded");
       });
@@ -84,8 +91,87 @@
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50000!2d9.9835!3d52.6958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b03ea757963d1b:0x9a9b60d1d9061e7!2sLandgasthof%20Wildwasser!5e0!3m2!1sde!2sde!4v1" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </section>
 
+      <section class="s" data-panel data-img="3">
+        <h2>Unterkunft <span class="hs">oder</span> Heimfahrt</h2>
 
-        <section class="s quiz-section" data-panel data-img="0" id="quiz">
+        <p>
+          Für alle, mit denen wir noch keine individuelle
+          Übernachtungsmöglichkeit besprochen haben, haben wir
+          hier ein paar Optionen zusammengestellt.
+        </p>
+
+        <h3>Shuttle &amp; Heimreise</h3>
+
+        <p>
+          Wir feiern bis 3:00 Uhr!
+          Damit ihr anschließend gut nach Hause kommt,
+          organisieren wir einen kleinen Shuttleservice zum
+          Hotel Celler Tor und zum
+          Bahnhof Celle.
+        </p>
+
+        <p>
+          Von Celle fahren folgende Züge für
+          ca. 7 € pro Person:
+        </p>
+
+        <ul>
+          <li>Nach Hannover: 03:00 und 04:27 Uhr</li>
+          <li>Nach Hamburg: 04:18 Uhr</li>
+        </ul>
+
+        <p>
+          Alternativ könnt ihr euch ein Uber direkt zum
+          Hannover Hauptbahnhof teilen.
+          Das kostet ungefähr 90 € für 4 Personen
+          oder 125 € für 6 Personen.
+        </p>
+
+        <h3>Übernachtungsmöglichkeiten</h3>
+
+        <p>
+          Im Hotel Celler Tor könnt ihr ein
+          Doppelzimmer für ca. 150 € pro Nacht buchen.
+          Alternativ gibt es direkt in Wolthausen einige
+          kleinere Ferienwohnungen:
+        </p>
+
+        <ul>
+          <li>Hoppenstedt (2–3 Pers.) – Twechten 3,
+            Tel. <a href="tel:051433403">05143/3403</a></li>
+          <li>Haus Blickfeld (2–4 Pers.) – Faßweg 12,
+            Tel. <a href="tel:0514393791">05143/93791</a></li>
+          <li>Ute's Fachwerk (DZ mit Beistellbett) –
+            Up Beckmann's Felle,
+            Tel. <a href="tel:01726144776">0172/6144776</a></li>
+          <li>Ferienwohnung Freitag (2–5 Pers.) – Beim Hofe 6,
+            Tel. <a href="tel:051431326">05143/1326</a></li>
+          <li>Ferienwohnung Staebner (2–4 Pers.) – Beim Hofe 2,
+            Tel. <a href="tel:051435216">05143/5216</a></li>
+          <li>Zur alten Bäckerei (4–6 Pers.) – Harburger Str. 6,
+            Tel. <a href="tel:051438316">05143/8316</a></li>
+          <li>Hof Höper (2–5 Pers.) – Harburger Str. 24,
+            Tel. <a href="tel:05143770">05143/770</a></li>
+          <li>Höpers Wohnpark (2–5 Pers.) – An der Örtze 2a,
+            Tel. <a href="tel:05143778">05143/778</a></li>
+        </ul>
+
+        <p>
+          Egal ob ihr übernachtet oder nachts noch nach Hause
+          fahrt – wir freuen uns darauf, mit euch bis zum
+          Schluss zu feiern!
+        </p>
+      </section>
+
+      <section class="s" data-panel data-img="4">
+        <h2><span class="hs">Unser </span>Dresscode</h2>
+        <p>Wir wollen, dass Ihr Euch wohlfühlt – gern festlich, gern bunt, gern ihr selbst. Farbe ist ausdrücklich willkommen und verleiht unserem Tag zusätzliche Lebendigkeit. Über elegante Abendgarderobe freuen wir uns sehr.</p>
+        <p>Eine kleine Bitte gibt es dennoch: Weiß ist an diesem Tag Stine vorbehalten. Alles andere darf mit Stil, Freude und Persönlichkeit getragen werden.</p>
+      </section>
+
+
+
+      <section class="s quiz-section" data-panel data-img="0" id="quiz">
           <h2><span class="hs">Wie gut kennt ihr </span>Stine &amp; Luis?</h2>
           <p>10 Fragen, jeweils 3 Möglichkeiten – mal sehen, wie gut ihr uns wirklich kennt.</p>
 
@@ -113,19 +199,38 @@
           </div>
         </section>
 
+<section class="s" data-panel data-img="3">
+
+  <h2>Newstime: <span class="hs">Was ist schon so alles passiert?</span></h2>
+
+  <p>
+    Du bekommst nicht genug von der Website? Du bist auf der Suche nach Ice-Breakern und Gesprächsthemen für die Hochzeit? Du bist einfach neugierig was noch zu passiert ist? Dann bist Du hier genau richtig. Wir haben für Dich die wichtigsten News zusammengetragen, damit Du immer auf dem Laufenden bist.
+  </p>
+
+  <div class="news-grid">
+
+    <a href="/jga.html" class="news-card">
+
+      <div class="news-card__content">
+        <span class="news-card__date">September 2026 · JGA</span>
+        <h3>Stines Junggesellinnenabschied</h3>
+        <span class="news-card__link">Artikel lesen →</span>
+      </div>
+    </a>
+
+  </div>
+
+</section>
 
       </main>
 
+
+      
       <section class="future-teaser">
         <div class="future-teaser__overlay">
           <div class="future-teaser__lines">
             <div></div>
             <div></div>
-            <div>Mehr Infos gibt es, sobald die Hochzeit näher rückt!</div>
-            <div>Mehr Infos gibt es, sobald die Hochzeit näher rückt!</div>
-            <div>Mehr Infos gibt es, sobald die Hochzeit näher rückt!</div>
-            <div>Mehr Infos gibt es, sobald die Hochzeit näher rückt!</div>
-            <div>Mehr Infos gibt es, sobald die Hochzeit näher rückt!</div>
             <div>Mehr Infos gibt es, sobald die Hochzeit näher rückt!</div>
             <div>Mehr Infos gibt es, sobald die Hochzeit näher rückt!</div>
             <div>Mehr Infos gibt es, sobald die Hochzeit näher rückt!</div>
@@ -142,15 +247,9 @@
         <div class="future-teaser__content">
           <div class="future-teaser__inner">
 
-            <section class="s" data-panel data-img="3">
-          <h2>Unterkunft <span class="hs">oder</span> Heimfahrt</h2>
-          <p>Wer eine weitere Anreise zurücklegen muss, muss selbstverständlich nicht direkt wieder abreisen. Der Landgasthof Wildwasser hat selbst einige Übernachtungsmöglichkeiten im Haus. Auch in der nahen Umgebung oder in Celle sind weitere Hotels oder Ferienwohnungen verfügbar. Um eine koordinierte Buchung zu gewährleisten, werden wir - sobald die Hochzeit ein kleines bisschen näher rückt - eine Abfrage über benötigte Übernachtungsmöglichkeiten starten.</p>
-          <p>Wer von seiner Unterkunft oder seinem Zuhause nur durch eine geringe Entfernung getrennt ist, darf unseren Shuttleservice in Anspruch nehmen, der erreichbare Strecken im Umkreis oder auch den Bahnhof in Celle gern anfährt.</p>
-        </section>
-
             <section class="s" data-panel data-img="1">
               <h2>Ablauf</h2>
-              <p>Hier dürft ihr neugierig auf weitere Informationen warten. Aber schon vorab: wir starten erst am Nachmittag.</p>
+              <p>Hier dürft ihr neugierig auf weitere Informationen warten. Aber schon vorab: wir starten gegen 16:00 Uhr.</p>
             </section>
             
             <section class="s" data-panel data-img="1">
@@ -179,17 +278,6 @@
               <p>Schon so neugierig, dass Du bis hier hin gelesen hast? 🙂 Hab' noch ein klein wenig Geduld - wir versprechen eine gut durchdachte Sitzordnung.</p>
             </section>
 
-            <section class="s" data-panel data-img="4">
-              <h2>Dresscode</h2>
-              <p>Wir wollen, dass Ihr Euch wohlfühlt – gern festlich, gern bunt, gern ihr selbst. Farbe ist ausdrücklich willkommen und verleiht unserem Tag zusätzliche Lebendigkeit. Über elegante Abendgarderobe freuen wir uns allerdings sehr.</p>
-              <p>Eine kleine Bitte gibt es dennoch: Weiß ist an diesem Tag Stine vorbehalten. Alles andere darf mit Stil, Freude und Persönlichkeit getragen werden.</p>
-              <p>Eine kleine Inspiration wollen wir Euch aber gern mit auf den Weg geben:</p>
-            </section>
-
-            <section class="s" data-panel data-img="4">
-              <h2>RSVP</h2>
-              <p>Schalten wir frei, wenn unsere Hochzeit etwas näher rückt.</p>
-            </section>
           </div>
         </div>
       </section>
